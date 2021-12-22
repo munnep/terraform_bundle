@@ -5,8 +5,12 @@ This repository describes how to build and use terraform-bundle to create a zip 
 This repository is based on the following [README.md](https://github.com/hashicorp/terraform/blob/main/tools/terraform-bundle/README.md) file from HashiCorp
 
 
-This repository shows you the following
-- Builds a terraform-bundle
+This repository has the following: 
+- Vagrant file which can start a virtual machine:  
+  This virtual machine will do the following at the start
+    - install go software
+    - clone the hashicorp terraform repository [https://github.com/hashicorp/terraform](https://github.com/hashicorp/terraform)
+    - from this terraform repository build a terraform-bundle
 - Use this bundle to generate a zipfile containing terraform 0.15 and the latest AWS provider
 
 # Prerequisites
@@ -35,13 +39,27 @@ vagrant ssh
 ```
 cd /vagrant
 ```
-- create the bundle using the ```terraform-bundle.hcl```
+- Here you will find a ```terraform-bundle``` which was created during startup of the machine
+- create the bundle using the ```terraform-bundle.hcl```. Edit this file for changes you want
 ```
 ./terraform-bundle package /vagrant/terraform-bundle.hcl
 ```
 output
 ```
 terraform_0.15.5-bundle2021122213_linux_amd64.zip
+```
+- You can use this zipfile on Terraform Enterprise or on a machine where no providers can be downloaded
+- exit out of the vagrant machine
+```
+exit
+```
+- Stop the vagrant machine
+```
+vagrant halt
+```
+- When you are completely done you can remove it
+```
+vagrant destroy
 ```
 
 # done
