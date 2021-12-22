@@ -6,6 +6,8 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "terraform-bundle"
 
     config.vm.provision "shell", path: "vagrant_scripts/install_go.sh"
+
+    config.vm.provision "shell", path: "vagrant_scripts/terraform_bundle_build.sh", privileged: false
   
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024*2
